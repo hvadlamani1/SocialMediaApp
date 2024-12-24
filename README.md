@@ -19,7 +19,7 @@ A simple social media platform built with **Node.js**, **Express**, **SQLite3**,
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/social-media-app.git
+   git clone https://github.com/hvadlamani/SocialMediaApp.git
    cd social-media-app
 
 
