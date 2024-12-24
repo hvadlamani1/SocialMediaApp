@@ -24,5 +24,6 @@ A simple social media platform built with **Node.js**, **Express**, **SQLite3**,
    cd social-media-app
 
 ### To run
-- npm start
+```bash
+npm start
 
