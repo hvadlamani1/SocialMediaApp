@@ -23,4 +23,6 @@ A simple social media platform built with **Node.js**, **Express**, **SQLite3**,
    git clone https://github.com/hvadlamani/SocialMediaApp.git
    cd social-media-app
 
+### To run
+- npm start
 
