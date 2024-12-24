@@ -1,4 +1,5 @@
 # Social Media App
+# Author: Hemanth Vadlamani
 
 A simple social media platform built with **Node.js**, **Express**, **SQLite3**, and **Sequelize**. This application allows users to create posts, view them, like posts, and manage data with a user-friendly interface.
 
