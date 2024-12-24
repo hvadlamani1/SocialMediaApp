@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smile App - Posts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+    .post {
+      background-color: white;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      max-width: 600px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .post-title {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    .post-body {
+      margin-bottom: 15px;
+    }
+    .post-footer {
+      display: flex;
+      justify-content: space-between;
+    }
+    .like-button {
+      cursor: pointer;
+      color: #4CAF50;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smile Portal</h1>
+  </header>
+  <main id="post-container">
+    <p>Loading posts...</p>
+  </main>
+  <script>
+    async function fetchPosts() {
+      try {
+        const response = await fetch('/api/');
+        const data = await response.json();
+        renderPosts(data.posts);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    }
+
+    function renderPosts(posts) {
+      const container = document.getElementById('post-container');
+      container.innerHTML = ''; // Clear loading text
+      if (posts.length === 0) {
+        container.innerHTML = '<p>No posts available.</p>';
+        return;
+      }
+
+      posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+
+        postElement.innerHTML = `
+          <div class="post-title">${post.title}</div>
+          <div class="post-body">${post.body}</div>
+          <div class="post-footer">
+            <span>Happiness Level: ${post.happinessLevel}</span>
+            <span class="like-button" onclick="likePost(${post.id})">❤️ ${post.likes} Likes</span>
+          </div>
+        `;
+        container.appendChild(postElement);
+      });
+    }
+
+    async function likePost(postId) {
+      try {
+        const response = await fetch(`/api/post/${postId}/like`, { method: 'POST' });
+        const data = await response.json();
+        alert(`Post liked! New like count: ${data.like_count}`);
+        fetchPosts(); // Refresh posts
+      } catch (error) {
+        console.error('Error liking post:', error);
+      }
+    }
+
+    fetchPosts(); // Initial fetch
+  </script>
+</body>
+</html>
